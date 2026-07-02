@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapia CRM | Gestão Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">Zapia<span>CRM</span></div>
+        <ul class="nav-links">
+            <li class="active" id="nav-dashboard">📊 Dashboard</li>
+            <li id="nav-leads">👥 Leads</li>
+            <li id="nav-relatorios">📈 Relatórios</li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="search-bar">
+                <input type="text" id="input-busca" placeholder="Buscar por nome ou empresa...">
+            </div>
+            <button id="btn-novo-lead" class="btn-primary">+ Novo Lead</button>
+        </header>
+
+        <!-- TELA 1: KANBAN -->
+        <section class="view-container" id="view-dashboard">
+            <div class="kanban-board">
+                <div class="kanban-column" id="novo">
+                    <h3>Novo Lead <span class="count">0</span></h3>
+                    <div class="kanban-cards" id="cards-novo"></div>
+                </div>
+                <div class="kanban-column" id="contato">
+                    <h3>Em Contato <span class="count">0</span></h3>
+                    <div class="kanban-cards" id="cards-contato"></div>
+                </div>
+                <div class="kanban-column" id="proposta">
+                    <h3>Proposta <span class="count">0</span></h3>
+                    <div class="kanban-cards" id="cards-proposta"></div>
+                </div>
+                <div class="kanban-column" id="fechado">
+                    <h3>Fechado <span class="count">0</span></h3>
+                    <div class="kanban-cards" id="cards-fechado"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA 2: LISTA -->
+        <section class="view-container" id="view-leads" style="display: none;">
+            <div class="table-container">
+                <h2 style="margin-bottom: 20px;">📋 Lista Completa de Leads</h2>
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Empresa</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela-leads"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TELA 3: RELATÓRIOS -->
+        <section class="view-container" id="view-relatorios" style="display: none;">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>💰 Valor em Negociação</h3>
+                    <p id="metric-valor">R$ 0</p>
+                </div>
+                <div class="metric-card">
+                    <h3>📈 Taxa de Conversão</h3>
+                    <p id="metric-conversao">0%</p>
+                </div>
+                <div class="metric-card">
+                    <h3>🎯 Ticket Médio (Vendas)</h3>
+                    <p id="metric-ticket">R$ 0</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal-lead" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Novo Lead</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="form-lead">
+                <div class="form-group">
+                    <label>Nome do Contato</label>
+                    <input type="text" id="lead-nome" placeholder="Ex: Ewerton Natan" required>
+                </div>
+                <div class="form-group">
+                    <label>Empresa</label>
+                    <input type="text" id="lead-empresa" placeholder="Ex: ADS Tech" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Estimado (R$)</label>
+                    <input type="number" id="lead-valor" placeholder="Ex: 5000" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Salvar Lead</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

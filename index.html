@@ -46,7 +46,7 @@
             </div>
         </section>
 
-        <!-- TELA 2: LISTA -->
+        <!-- TELA 2: LISTA COMPLETA -->
         <section class="view-container" id="view-leads" style="display: none;">
             <div class="table-container">
                 <h2 style="margin-bottom: 20px;">📋 Lista Completa de Leads</h2>
@@ -84,12 +84,12 @@
         </section>
     </main>
 
-    <!-- MODAL -->
+    <!-- MODAL 1: CADASTRO DE NOVO LEAD -->
     <div id="modal-lead" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Novo Lead</h2>
-                <span class="close-modal">&times;</span>
+                <h2>Cadastrar Novo Lead</h2>
+                <span class="close-modal" id="close-novo">&times;</span>
             </div>
             <form id="form-lead">
                 <div class="form-group">
@@ -106,6 +106,26 @@
                 </div>
                 <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Salvar Lead</button>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: DETALHES E HISTÓRICO -->
+    <div id="modal-detalhes" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 id="detalhe-nome-lead">Detalhes do Lead</h2>
+                <span class="close-modal" id="close-detalhes">&times;</span>
+            </div>
+            <div id="detalhe-info" style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border);"></div>
+            
+            <div class="historico-secao">
+                <h3>📋 Histórico de Notas</h3>
+                <div id="lista-notas" style="max-height: 200px; overflow-y: auto; margin: 15px 0; padding: 15px; background: #f1f5f9; border-radius: 8px;"></div>
+                <div class="form-group">
+                    <textarea id="nova-nota" placeholder="Escreva uma anotação sobre a conversa..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border); resize: none;" rows="3"></textarea>
+                    <button id="btn-add-nota" class="btn-primary" style="width: 100%; margin-top: 10px;">Adicionar Nota</button>
+                </div>
+            </div>
         </div>
     </div>
 

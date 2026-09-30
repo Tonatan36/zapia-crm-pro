@@ -1,3 +1,4 @@
+// script.js - Zapia CRM Pro (Focado em Dados e Gestão)
 const CRM = {
     leads: JSON.parse(localStorage.getItem('zapia_crm_leads')) || [],
     leadAtualId: null,
@@ -125,7 +126,7 @@ const CRM = {
         const container = document.getElementById('lista-notas');
         if (!container) return;
         container.innerHTML = (!notas || notas.length === 0) ? 
-            '<p style="text-align:center;color:#94a3b8;">Sem notas.</p>' :
+            '<p style="text-align:center;color:#94a3b8;">Sem notas registradas.</p>' :
             notas.map(n => '<div class="nota-item">' + n.texto + '<span class="nota-data">' + n.data + '</span></div>').join('');
     },
 
@@ -136,7 +137,7 @@ const CRM = {
 
     excluirLead(id, e) {
         if (e) e.stopPropagation();
-        if (confirm("Excluir este lead?")) {
+        if (confirm("Deseja realmente excluir este lead?")) {
             this.leads = this.leads.filter(l => l.id !== id);
             this.save();
             this.render();
@@ -191,8 +192,8 @@ const CRM = {
                     '<td>' + l.nome + '</td>' +
                     '<td>' + l.empresa + '</td>' +
                     '<td style="color:var(--success);font-weight:bold;">' + this.formatarMoeda(l.valor) + '</td>' +
-                    '<td>' + l.status + '</td>' +
-                    '<td><button onclick="CRM.excluirLead(' + l.id + ', event)" style="color:var(--danger);border:none;background:none;cursor:pointer;">Excluir</button></td>' +
+                    '<td><span style="text-transform:uppercase; font-size:0.8rem; font-weight:bold; background:#e2e8f0; padding:3px 8px; border-radius:4px;">' + l.status + '</span></td>' +
+                    '<td><button onclick="CRM.excluirLead(' + l.id + ', event)" style="color:var(--danger);border:none;background:none;cursor:pointer;font-weight:bold;">Excluir</button></td>' +
                 '</tr>';
             }).join('');
         }
@@ -201,13 +202,16 @@ const CRM = {
     renderRelatorios() {
         const fechados = this.leads.filter(l => l.status === 'fechado');
         const negociacao = this.leads.filter(l => l.status !== 'fechado');
+        
         const valNeg = negociacao.reduce((acc, l) => acc + (Number(l.valor) || 0), 0);
+        const valFechado = fechados.reduce((acc, l) => acc + (Number(l.valor) || 0), 0);
         const conv = this.leads.length ? Math.round((fechados.length / this.leads.length) * 100) : 0;
-        const ticket = fechados.length ? Math.round(fechados.reduce((a, b) => a + (Number(b.valor) || 0), 0) / fechados.length) : 0;
+        const ticket = fechados.length ? Math.round(valFechado / fechados.length) : 0;
         
         const elValor = document.getElementById('metric-valor');
         const elConv = document.getElementById('metric-conversao');
         const elTicket = document.getElementById('metric-ticket');
+        
         if (elValor) elValor.innerText = this.formatarMoeda(valNeg);
         if (elConv) elConv.innerText = conv + '%';
         if (elTicket) elTicket.innerText = this.formatarMoeda(ticket);
@@ -215,3 +219,4 @@ const CRM = {
 };
 
 CRM.init();
+                                                         
